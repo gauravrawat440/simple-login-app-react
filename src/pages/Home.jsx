@@ -15,15 +15,13 @@ const Home = () => {
     <div className="home-page">
       <Navbar />
       <div className="container-fluid p-4 d-flex flex-column align-items-center">
-        <div
-          className="card text-center"
-          style={{ width: "28rem", height: "50vh" }}
-        >
-          <div className="card-header">User Details</div>
+        <div className="card p-2 m-2" style={{ width: "18rem" }}>
+          <img src={userDetails.imageUrl} className="card-img-top" alt="..."/>
           <div className="card-body">
-            {userDetails?.fullName}
-            <br />
-            {userDetails?.email}
+            <h5 className="card-title">{userDetails?.fullName}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {userDetails?.email}
+            </h6>
           </div>
         </div>
       </div>{" "}

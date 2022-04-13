@@ -8,11 +8,14 @@ import { GoogleLogout, useGoogleLogout } from "react-google-login";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../store/index";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
+import "../styles/navbar.css";
 const Navbar = () => {
   const clientId = useSelector((state) => state.clientId);
   const dispatch = useDispatch();
   const userDetailsString = useSelector((state) => state.userDetails);
+  const activeTab = useSelector((state) => state.activeTab);
   const [userDetails, setDetails] = useState({});
   const navigate = useNavigate();
   let count = 0;
@@ -44,6 +47,9 @@ const Navbar = () => {
     dispatch(actions.setUserDetails(""));
     navigate("/");
   };
+  const setActiveTab = (tab = "home") => {
+    dispatch(actions.setActiveTab(tab));
+  };
   const onFailure = () => {
     alert("Logout failed please try again.");
   };
@@ -54,10 +60,10 @@ const Navbar = () => {
   });
   return (
     <div style={{ width: "100%" }}>
-      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Login App
+          <a className="navbar-brand px-2" href="#">
+            <FontAwesomeIcon icon={faUserAstronaut} />
           </a>
           <button
             className="navbar-toggler"
@@ -69,23 +75,47 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav" style={{ width: "100%" }}>
-              <li className="nav-item col-1">
-                <Link className={"nav-link"} to="/home">
+              <li
+                className="nav-item col-1"
+                onClick={(e) => setActiveTab("home")}
+              >
+                <Link
+                  className={
+                    activeTab === "home" ? "nav-link active" : "nav-link"
+                  }
+                  to="/home"
+                >
                   Home
                 </Link>
               </li>
-              <li className="nav-item col-1">
-                <Link className={"nav-link"} to="/table">
+              <li
+                className="nav-item col-1"
+                onClick={(e) => setActiveTab("table")}
+              >
+                <Link
+                  className={
+                    activeTab === "table" ? "nav-link active" : "nav-link"
+                  }
+                  to="/table"
+                >
                   Table
                 </Link>
               </li>
-              <li className="nav-item col-1">
-                <Link className={"nav-link"} to="/jsondata">
+              <li
+                className="nav-item col-1"
+                onClick={(e) => setActiveTab("jsondata")}
+              >
+                <Link
+                  className={
+                    activeTab === "jsondata" ? "nav-link active" : "nav-link"
+                  }
+                  to="/jsondata"
+                >
                   JSON Data
                 </Link>
               </li>
-              <li className="nav-item col-6"></li>
-              <li className="nav-item dropdown col-3">
+              <li className="nav-item col-7"></li>
+              <li className="nav-item dropdown col-2">
                 <span
                   className="nav-link dropdown-toggle"
                   role="button"

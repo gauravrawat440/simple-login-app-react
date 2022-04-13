@@ -6,6 +6,7 @@ const clientIdSlice = createSlice({
       "750035540347-r58mmkvk5d51i9er0askki6aun1jvqjk.apps.googleusercontent.com",
     userDetails: "",
     inactivityCounter: 0,
+    activeTab: "home",
   },
   reducers: {
     setClientId(state, action) {
@@ -19,6 +20,9 @@ const clientIdSlice = createSlice({
     },
     resetInactivityCounter(state) {
       state.inactivityCounter = 0;
+    },
+    setActiveTab(state, action) {
+      state.activeTab = action.payload;
     },
   },
 });
